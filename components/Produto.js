@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { TextInputMask} from 'react-native-masked-text';
 
 
-export default function Produto({ onSalvarDados }){
+export default function Produto({ onSalvarDados, setTelaAtual }){
     const [qtd, setQTD] = useState('');
     const [produto, setProduto] = useState('');
     const [valor, setValor] = useState('');
@@ -38,7 +38,7 @@ export default function Produto({ onSalvarDados }){
                 onChangeText={setQTD}
                 style={[estilos.input, {width: '25%'}]}
                 maxLength={6}
-                //placeholder="Quantidade"
+                placeholder="Quantidade"
                 />
             </View>
             <View style={estilos.inputRow}>
