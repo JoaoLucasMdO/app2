@@ -34,6 +34,32 @@ export default function Storage(){
         }
     };
 
+    const apagarRegistros = async () => {
+        try {
+            await AsyncStorage.removeItem('registros');
+            setRegistros([]);
+            Alert.alert('Sucesso', 'Todos os registros foram apagados.');
+        } catch (error) {
+            console.error('Erro ao apagar registros:', error);
+            Alert.alert('Erro', 'Ocorreu um erro ao apagar os registros.');
+        }
+    };
+
+    const apagarRegistroIndividual = async (index) => {
+        try {
+            const registrosExistentes = await AsyncStorage.getItem('registros');
+            let registros = registrosExistentes ? JSON.parse(registrosExistentes) : [];
+            registros.splice(index, 1);
+            await AsyncStorage.setItem('registros', JSON.stringify(registros));
+            setRegistros(registros);
+            Alert.alert('Sucesso', 'Registro apagado.');
+        } catch (error) {
+            console.error('Erro ao apagar registro:', error);
+            Alert.alert('Erro', 'Não foi possível apagar o registro.');
+        }
+    };
+
+
     const carregarRegistros = async () => {
         try{
             const registrosExistentes = await AsyncStorage.getItem('registros');
@@ -55,12 +81,14 @@ export default function Storage(){
                 <>
                     <Produto onSalvarDados={salvarNoAsyncStorage}
                     telaAtual={telaAtual}
-                    setTelaAtual={setTelaAtual}/>
+                    setTelaAtual={setTelaAtual}
+                    onApagarRegistros={apagarRegistros}/>
                 </>
             ):(
                 <>
                     <Text style={styles.titulo}>Registros Salvos:</Text>
-                    <ListaRegistros registros={registros}/>
+                    <ListaRegistros registros={registros}
+                    onApagarRegistro={apagarRegistroIndividual}/>
                     <Button
                     title= "Voltar para Cadastro"
                     onPress={() => setTelaAtual('produto')}/>

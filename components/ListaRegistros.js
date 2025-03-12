@@ -1,16 +1,17 @@
 import React from 'react';
-import { FlatList, View, Text, StyleSheet } from 'react-native';
+import { FlatList, View, Text, StyleSheet, Button } from 'react-native';
 
-const ListaRegistros = ({ registros }) => {
+const ListaRegistros = ({ registros, onApagarRegistro }) => {
   return (
     <FlatList
       data={registros}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <View style={styles.item}>
           <Text style={styles.label}>Quantidade: <Text style={styles.value}>{item.qtd}</Text></Text>
           <Text style={styles.label}>Produto: <Text style={styles.value}>{item.produto}</Text></Text>
           <Text style={styles.label}>Valor: <Text style={styles.value}>{item.valor}</Text></Text>
+          <Button title="Apagar Registro" onPress={() => onApagarRegistro(index)}/>
         </View>
       )}
     />

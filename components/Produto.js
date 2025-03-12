@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { TextInputMask} from 'react-native-masked-text';
 
 
-export default function Produto({ onSalvarDados, setTelaAtual }){
+export default function Produto({ onSalvarDados, setTelaAtual, onApagarRegistros }){
     const [qtd, setQTD] = useState('');
     const [produto, setProduto] = useState('');
     const [valor, setValor] = useState('');
@@ -75,10 +75,13 @@ export default function Produto({ onSalvarDados, setTelaAtual }){
             <View style={[estilos.botao, {margin:10}]}>
                 <Button title='Ver Registros Salvos' onPress={() => setTelaAtual('registros')}/>
             </View>
+            <View style={[estilos.botao, {margin:10}]}>
+                <Button title="Apagar Registros Salvos" onPress={onApagarRegistros} />
+            </View>
         </View>
-    );
-    
+    ); 
 }
+
 const estilos = StyleSheet.create({
     container: {
         flex: 1,
