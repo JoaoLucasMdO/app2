@@ -2,6 +2,7 @@ import React, { useEffect, useState} from "react";
 import { StyleSheet, Text, View, TextInput,FlatList, Button, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Produto from "./Produto";
+import ListaRegistros from "./ListaRegistros";
 
 export default function Storage(){
     const [registros, setRegistros] = useState([]);
@@ -56,20 +57,10 @@ export default function Storage(){
                     telaAtual={telaAtual}
                     setTelaAtual={setTelaAtual}/>
                 </>
-            ): (
+            ):(
                 <>
                     <Text style={styles.titulo}>Registros Salvos:</Text>
-                    <FlatList
-                    data={registros}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item}) => (
-                        <View style={styles.item}>
-                            <Text>Quantidade: {item.qtd}</Text>
-                            <Text>Produto: {item.produto}</Text>
-                            <Text>Valor: {item.valor}</Text>
-                        </View>
-                    )}
-                    />
+                    <ListaRegistros registros={registros}/>
                     <Button
                     title= "Voltar para Cadastro"
                     onPress={() => setTelaAtual('produto')}/>
