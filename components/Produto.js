@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import { TextInputMask} from 'react-native-masked-text';
 
-
 export default function Produto({ onSalvarDados, setTelaAtual, onApagarRegistros }){
     const [qtd, setQTD] = useState('');
     const [produto, setProduto] = useState('');
@@ -12,9 +11,6 @@ export default function Produto({ onSalvarDados, setTelaAtual, onApagarRegistros
         if(qtd && produto && valor){
             //Envia dados para o componente pai usando a função recebida via props
             onSalvarDados(qtd, produto, valor);
-            setProduto(''); // Limpa o campo produto
-            setValor(''); // Limpa o campo valor
-            setQTD(''); // Limpa o campo quantidade
 
         } else {
             Alert.alert('Erro', 'Por favor, preencha todos os campos.')
@@ -30,9 +26,8 @@ export default function Produto({ onSalvarDados, setTelaAtual, onApagarRegistros
 
     return(
         <View style={estilos.container}>
-        <Text style={estilos.label}>Armazenamento Local</Text>
             <View style={estilos.inputRow}>
-                <Text style={estilos.label}>Quantidade</Text>
+                <Text style={estilos.label}>Quantidade:</Text>
                 <TextInput
                 value={qtd}
                 onChangeText={setQTD}
@@ -42,7 +37,7 @@ export default function Produto({ onSalvarDados, setTelaAtual, onApagarRegistros
                 />
             </View>
             <View style={estilos.inputRow}>
-                <Text style={estilos.label}> Produto </Text>
+                <Text style={estilos.label}> Produto:</Text>
                 <TextInput
                 value={produto}
                 onChangeText={setProduto}
